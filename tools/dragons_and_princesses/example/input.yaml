@@ -1,0 +1,8 @@
+n: 6
+cells:
+  - { type: start }  # cell 1
+  - { type: d, g: 10 } # cell 2
+  - { type: d, g: 12 } # cell 3
+  - { type: p, b: 2 } # cell 4 (NON FINAL)
+  - { type: d, g: 1 } # cell 5
+  - { type: p, b: 2 } # cell 6 (FINAL)
