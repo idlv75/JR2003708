@@ -1,10 +1,15 @@
+#!/usr/bin/env python3
+"""
+Dragons and Princesses Solution
+Files:
+dragons_and_princesses.py,test_dragons_and_princesses.py input.yaml
+"""
+
 import heapq
 from dataclasses import dataclass
 from typing import Union, List, Tuple
-
 import sys
 import yaml
-
 
 @dataclass(frozen=True)
 class Dragon:
