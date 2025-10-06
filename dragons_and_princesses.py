@@ -1,19 +1,20 @@
 import heapq
+from dataclasses import dataclass
 from typing import Union, List, Tuple
 
 import sys
 import yaml
 
 
+@dataclass(frozen=True)
 class Dragon:
-    def __init__(self, index, gold):
-        self.index = index
-        self.gold = gold
+    index: int
+    gold: int
 
+@dataclass(frozen=True)
 class Princess:
-    def __init__(self, index, beauty):
-        self.index = index
-        self.beauty = beauty
+    index: int
+    beauty: int
 
 Cell = Union[Dragon, Princess]
 
