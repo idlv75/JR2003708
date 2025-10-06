@@ -2,6 +2,14 @@
 ## Introduction
 This is my (Eyal Levi), proposed solution for the Dragons and princesses code problem.
 
+## Running the project
+```bash
+python main.py <path-to-yaml-file> <name-of-game>
+# in order to run the example:
+python main.py input.yaml main
+
+```
+
 ## Project Structure
 - `main.py` - the solution, comprised of a `main` function, a `solve` function which has most of the logic, and a helper function called `printer`
 - `reader.py` - where the yaml reading and parsing functions will reside. I will use a factory in the parser so that if need be, more types could be added. 
@@ -23,3 +31,6 @@ name-of-game:
 
 ## Tests
 Tests are located in test.py, using python's built in unittest module.
+```bash
+python test.py
+```
