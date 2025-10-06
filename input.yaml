@@ -1,0 +1,8 @@
+main:
+    - number_of_cells: 6
+    - game:
+          - d 10
+          - d 12
+          - p 2
+          - d 1
+          - p 2
