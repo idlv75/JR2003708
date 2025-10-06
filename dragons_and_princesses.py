@@ -97,13 +97,13 @@ def main():
     try:
         cells = load_journey_map(yaml_file)
         total_gold, killed_dragons_pos = get_journey_result(cells)
-        print(total_gold, killed_dragons_pos)
-        print("map loaded")
-        for c in cells:
-            if isinstance(c, Dragon):
-                print(f"Dragon cell: {c.index}, gold: {c.gold}")
-            else:
-                print(f"Princess cell: {c.index}, beauty: {c.beauty}")
+        if total_gold == -1:
+            print(-1)
+        else:
+            print(total_gold)
+            print(len(killed_dragons_pos))
+            if killed_dragons_pos:
+                print(*killed_dragons_pos)
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)
