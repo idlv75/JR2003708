@@ -1,4 +1,5 @@
-from typing import Union, List
+import heapq
+from typing import Union, List, Tuple
 
 import sys
 import yaml
@@ -53,6 +54,40 @@ def load_journey_map(filepath: str) -> List[Cell]:
 
     return cells
 
+
+def get_journey_result(cells: List[Cell]) -> Tuple[int, List[int]]:
+    """
+    Checks whether the knight can reach the final princess
+    and if so, returns the maximum amount of gold he can
+    collect in the way and the indices of the dragons he killed
+    """
+    heap = []
+    total_gold = 0
+
+    for cell in cells[:-1]:
+        if isinstance(cell, Dragon):
+            heapq.heappush(heap, (cell.gold, cell.index))
+            total_gold += cell.gold
+        elif isinstance(cell, Princess):
+            while len(heap) >= cell.beauty:
+                gold, _ = heapq.heappop(heap)
+                total_gold -= gold
+
+    last_princess = cells[-1]
+    try:
+        if not isinstance(last_princess, Princess):
+            raise ValueError("Last cell must be a princess!")
+    except ValueError as e:
+        print(f"Error: {e}")
+        sys.exit(1)
+
+    if len(heap) < last_princess.beauty:
+        return -1, []
+
+    killed_dragons_pos = sorted(idx for _, idx in heap)
+    return total_gold, killed_dragons_pos
+
+
 def main():
     if len(sys.argv) < 2:
         print("Error: missing input file.\nUse files: dragons_and_princesses.py, input.yaml")
@@ -61,6 +96,8 @@ def main():
     yaml_file = sys.argv[1]
     try:
         cells = load_journey_map(yaml_file)
+        total_gold, killed_dragons_pos = get_journey_result(cells)
+        print(total_gold, killed_dragons_pos)
         print("map loaded")
         for c in cells:
             if isinstance(c, Dragon):
