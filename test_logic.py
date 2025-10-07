@@ -1,4 +1,4 @@
-from dragons_and_princesses import Dragon, Princess, get_journey_result
+from src.logic import Dragon, Princess, get_journey_result
 
 
 def run_test(name, func):
