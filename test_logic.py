@@ -1,12 +1,5 @@
+import pytest
 from src.logic import Dragon, Princess, get_journey_result
-
-
-def run_test(name, func):
-    try:
-        func()
-        print(f"[PASS] {name}")
-    except Exception as e:
-        print(f"[FAIL] {name}: {e}")
 
 
 def test_not_killed_enough_dragons():
@@ -17,8 +10,7 @@ def test_not_killed_enough_dragons():
         Princess(5, 2),
     ]
     gold, killed = get_journey_result(cells)
-    if gold != -1:
-        raise Exception(f"Expected -1, got {gold}")
+    assert gold == -1
 
 
 def test_reached_last_princess():
@@ -29,10 +21,8 @@ def test_reached_last_princess():
         Princess(5, 2),
     ]
     gold, killed = get_journey_result(cells)
-    if gold != 15:
-        raise Exception(f"Expected gold = 15, got {gold}")
-    if killed != [2, 4]:
-        raise Exception(f"Expected killed=[2,4], got {killed}")
+    assert gold == 15
+    assert killed == [2, 4]
 
 
 def test_no_dragons():
@@ -41,8 +31,7 @@ def test_no_dragons():
         Princess(3, 2),
     ]
     gold, killed = get_journey_result(cells)
-    if gold != -1:
-        raise Exception(f"Expected -1, got {gold}")
+    assert gold == -1
 
 
 def test_exact_beauty_match():
@@ -52,10 +41,9 @@ def test_exact_beauty_match():
         Princess(4, 2),
     ]
     gold, killed = get_journey_result(cells)
-    if gold != 30:
-        raise Exception(f"Expected gold=30, got {gold}")
-    if killed != [2, 3]:
-        raise Exception(f"Expected killed=[2,3], got {killed}")
+    assert gold == 30
+    assert killed == [2, 3]
+
 
 def test_unreachable_final_princess():
     cells = [
@@ -66,15 +54,14 @@ def test_unreachable_final_princess():
         Princess(6, 3),
     ]
     gold, killed = get_journey_result(cells)
-    if gold != -1:
-        raise Exception(f"Expected -1, got {gold}")
+    assert gold == -1
 
 
-
-if __name__ == "__main__":
-    run_test("not killed enough dragons", test_not_killed_enough_dragons)
-    run_test("reached last princess", test_reached_last_princess)
-    run_test("no dragons", test_no_dragons)
-    run_test("exact beauty match", test_exact_beauty_match)
-    run_test("unreachable final princess", test_unreachable_final_princess)
-
+def test_no_princess_at_end():
+    cells = [
+        Dragon(2, 5),
+        Princess(3, 2),
+        Dragon(4, 10),  # ends with dragon
+    ]
+    with pytest.raises(ValueError):
+        get_journey_result(cells)
