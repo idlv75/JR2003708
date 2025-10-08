@@ -1,0 +1,19 @@
+# Dragons and Princesses Problem Input
+# Format: n (number of cells), followed by n-1 lines of (type, value)
+# type: 'd' for dragon, 'p' for princess
+# value: gold for dragon, beauty requirement for princess
+
+n: 5
+cells:
+  - type: "d"
+    value: 10
+    position: 2
+  - type: "p"
+    value: 2
+    position: 3
+  - type: "d"
+    value: 5
+    position: 4
+  - type: "p"
+    value: 3
+    position: 5
