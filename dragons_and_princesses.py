@@ -2,9 +2,6 @@
 """
 Dragons and Princesses Problem Solution
 CodeForces Problem #548
-
-This module provides a solution for the Dragons and Princesses problem
-using a greedy algorithm with Union-Find data structure.
 """
 
 import sys
