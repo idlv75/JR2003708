@@ -2,6 +2,17 @@
 
 Python solution for CodeForces Problem #548.
 
+## Solution Requirements
+- ✅ Implemented in Python
+- ✅ Python script is executable 
+- ✅ Input consumed as YAML file with example provided
+- ✅ Submitted as Pull Request to this repository
+
+## How to stand out from the crowd
+- ✅ **Code Style**: Clean, well-documented code with type hints
+- ✅ **Immutability**: Uses dataclasses for immutable data structures
+- ✅ **Unittests**: Comprehensive test coverage
+
 ## Features
 - Greedy algorithm with Union-Find data structure
 - YAML input support
