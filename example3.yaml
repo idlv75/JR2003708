@@ -1,0 +1,9 @@
+# Example 3: Simple case with one dragon
+# Expected output: 100 gold, 1 dragon at cell 2
+n: 3
+cells:
+  - type: d
+    value: 100
+  - type: p
+    value: 1
+

@@ -1,0 +1,19 @@
+# Example 4: Multiple intermediate princesses
+# Expected output: Should select highest value dragons within constraints
+n: 8
+cells:
+  - type: d
+    value: 50
+  - type: d
+    value: 100
+  - type: p
+    value: 2
+  - type: d
+    value: 75
+  - type: p
+    value: 2
+  - type: d
+    value: 25
+  - type: p
+    value: 3
+

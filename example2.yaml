@@ -1,0 +1,15 @@
+# Example 2 from the problem statement
+# Expected output: -1 (impossible)
+n: 6
+cells:
+  - type: d
+    value: 10
+  - type: d
+    value: 12
+  - type: p
+    value: 2
+  - type: d
+    value: 1
+  - type: p
+    value: 3
+
