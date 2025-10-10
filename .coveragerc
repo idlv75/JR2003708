@@ -1,0 +1,26 @@
+[run]
+branch = True
+source = src/knight_journey
+parallel = True
+concurrency = multiprocessing
+
+[report]
+show_missing = True
+sort = Cover
+
+omit =
+    */__init__.py
+    */tests/*
+    */.venv/*
+    */setup.py
+    */build/*
+    */dist/*
+    */knight_journey.egg-info/*
+
+[paths]
+source =
+    src/knight_journey
+    .venv/lib/*/site-packages/knight_journey
+
+[html]
+directory = htmlcov

@@ -1,0 +1,124 @@
+# =============================================================================
+# Knight Journey - Docker Compose Configuration
+# =============================================================================
+# Provides easy development and testing environment
+# Supports multiple services and configurations
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # Main application service
+  # ---------------------------------------------------------------------------
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PY_VER: ${PYTHON_VERSION:-3.13}
+    image: knight-journey:${TAG:-latest}
+    container_name: knight-journey-app
+    
+    # Mount current directory for development
+    volumes:
+      - ./input.yaml:/app/input.yaml:ro
+      - ./output:/app/output:rw
+    
+    # Override default command
+    command: ["--input", "/app/input.yaml"]
+    
+    # Environment variables
+    environment:
+      - PYTHONUNBUFFERED=1
+    
+    # Resource limits (optional)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    
+    # Restart policy
+    restart: "no"
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ---------------------------------------------------------------------------
+  # Testing service - runs pytest
+  # ---------------------------------------------------------------------------
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+      args:
+        PY_VER: ${PYTHON_VERSION:-3.13}
+    image: knight-journey-test:${TAG:-latest}
+    container_name: knight-journey-test
+    
+    volumes:
+      - ./src:/app/src:ro
+      - ./tests:/app/tests:ro
+      - ./pyproject.toml:/app/pyproject.toml:ro
+    
+    command: ["pytest", "-v", "--cov=knight_journey", "--cov-report=term-missing"]
+    
+    environment:
+      - PYTHONUNBUFFERED=1
+    
+    restart: "no"
+    
+    profiles:
+      - test
+
+  # ---------------------------------------------------------------------------
+  # Development service - with shell access
+  # ---------------------------------------------------------------------------
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PY_VER: ${PYTHON_VERSION:-3.13}
+    image: knight-journey-dev:${TAG:-latest}
+    container_name: knight-journey-dev
+    
+    volumes:
+      - .:/app:rw
+    
+    command: ["/bin/bash"]
+    stdin_open: true
+    tty: true
+    
+    environment:
+      - PYTHONUNBUFFERED=1
+    
+    restart: "no"
+    
+    profiles:
+      - dev
+
+# =============================================================================
+# Networks (optional - for future expansion)
+# =============================================================================
+networks:
+  default:
+    name: knight-journey-network
+    driver: bridge
+
+# =============================================================================
+# Volumes (optional - for persistent data)
+# =============================================================================
+volumes:
+  output:
+    name: knight-journey-output
+    driver: local
+
+
