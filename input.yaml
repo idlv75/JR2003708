@@ -1,0 +1,18 @@
+n: 9
+cells:
+  - type: d
+    value: 5
+  - type: d
+    value: 10
+  - type: d
+    value: 7
+  - type: p
+    value: 2
+  - type: d
+    value: 8
+  - type: d
+    value: 12
+  - type: d
+    value: 3
+  - type: p
+    value: 3
