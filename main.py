@@ -1,4 +1,4 @@
-#!/user/bin/env pytohn3
+#!/usr/bin/env python3
 # Implement reading from a YAML file
 # Implement a solution in python for the #548 CodeForces problem.
 import sys
